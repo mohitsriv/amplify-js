@@ -19,6 +19,7 @@ const errors = {
     currentUserPoolUser745: "No current user in userPool",
     currentUserPoolUser754: "No current user in userPool",
     getSyncedUser771: "No userPool",
+    currentAuthenticatedUser800: "not authenticated",
     currentSession822: "No userPool",
     currentSession827: "No current user",
     currentSession835: "No current user",
