@@ -1,0 +1,15 @@
+const errors = {
+    createInstance106: "API no configured",
+    get128: "Api + apiName + does not exist",
+    post151: "Api + apiName + does not exist",
+    put174: "Api + apiName + does not exist",
+    patch197: "Api + apiName + does not exist",
+    del220: "Api + apiName + does not exist",
+    head243: "Api + apiName + does not exist",
+    _headerBasedAuth280: "No credentials",
+    _headerBasedAuth285: "No federated jwt",
+    _headerBasedAuth297: "No Auth module registered in Amplify",
+    graphql342: "invalid operation type: ${operationType}",
+    _graphql386: "No graphql endpoint provided.",
+    _graphqlSubscribe444: "No pubsub module applied for subscription",
+};
