@@ -16,11 +16,11 @@ jest.mock('amazon-cognito-identity-js/lib/CognitoUserSession', () => {
 
     CognitoUserSession.prototype.isValid = () => {
         return true;
-    }
+    };
 
     CognitoUserSession.prototype.getRefreshToken = () => {
         return 'refreshToken';
-    }
+    };
 
     return CognitoUserSession;
 });
@@ -139,7 +139,7 @@ jest.mock('amazon-cognito-identity-js/lib/CognitoUser', () => {
 
     CognitoUser.prototype.refreshSession = (refreshToken, callback) => {
         callback(null, 'session');
-    }
+    };
 
     return CognitoUser;
 });
@@ -161,6 +161,7 @@ import Cache from '@aws-amplify/cache';
 import { CookieStorage, CognitoUserPool, CognitoUser, CognitoUserSession, CognitoIdToken, CognitoAccessToken } from 'amazon-cognito-identity-js';
 import { CognitoIdentityCredentials } from 'aws-sdk';
 import { Credentials, GoogleOAuth } from '@aws-amplify/core';
+import AuthError from '../src/errors';
 
 const authOptions : AuthOptions = {
     userPoolId: "awsUserPoolsId",
@@ -234,6 +235,7 @@ describe('auth unit test', () => {
             try {
                 await auth.signUp(attrs);
             } catch (e) {
+                // console.log(e);
                 expect(e).not.toBeNull();
             }
         });
@@ -273,7 +275,12 @@ describe('auth unit test', () => {
             try {
                 await auth.signUp('username', 'password', 'email', 'phone');
             } catch (e) {
-                expect(e).toBe('No userPool');
+                const err = AuthError.createError("noUserPool");
+                // console.log("message: ", err.message);
+                // console.log("suggestion: ", err.suggestion);
+                // console.log("cause: ", err.cause);
+                // console.log(e);
+                expect(e).toEqual(err);
             }
         });
 
@@ -358,7 +365,7 @@ describe('auth unit test', () => {
             try {
                 await auth.confirmSignUp('username', 'code');
             } catch (e) {
-                expect(e).toBe('No userPool');
+                expect(e).toEqual(AuthError.createError("noUserPool",new Error("This is an error")));
             }
         });
 
@@ -422,7 +429,7 @@ describe('auth unit test', () => {
             try {
                 await auth.resendSignUp('username');
             } catch (e) {
-                expect(e).toBe('No userPool');
+                expect(e).toEqual(AuthError.createError("noUserPool",new Error("This is an error")));
             }
         });
 
@@ -824,7 +831,7 @@ describe('auth unit test', () => {
             try {
                 await auth.completeNewPassword(user, null, {});
             } catch (e) {
-                expect(e).toBe('Password cannot be empty');
+                expect(e).toEqual(AuthError.createError("noPassword"));
             }
         });
     });
@@ -921,7 +928,7 @@ describe('auth unit test', () => {
             try {
                 await auth.currentSession();
             } catch (e) {
-                expect(e).toBe('No current user');
+                expect(e).toEqual(AuthError.createError("noCurrentUser"));
             }
 
             spyon.mockClear();
@@ -940,7 +947,7 @@ describe('auth unit test', () => {
             try {
                 await auth.currentSession();
             } catch (e) {
-                expect(e).toBe('No userPool');
+                expect(e).toEqual(AuthError.createError("noUserPool",new Error("This is an error")));
             }
         });
     });
@@ -1264,7 +1271,7 @@ describe('auth unit test', () => {
             try {
                 await auth.verifyUserAttributeSubmit(user, {}, null);
             } catch (e) {
-                expect(e).toBe('Code cannot be empty');
+                expect(e).toEqual(AuthError.createError("noCode"));
             }
         });
     });
@@ -1416,7 +1423,8 @@ describe('auth unit test', () => {
         test('get guest credentials failed', async() => {
             const auth = new Auth(authOptionsWithNoUserPoolId);
 
-            const cognitoCredentialSpyon = jest.spyOn(CognitoIdentityCredentials.prototype, 'getPromise').mockImplementation(() => {
+            const cognitoCredentialSpyon = jest.spyOn(
+                CognitoIdentityCredentials.prototype, 'getPromise').mockImplementation(() => {
                 return new Promise((res, rej) => {
                     rej('err');
                 });
@@ -1924,7 +1932,7 @@ describe('auth unit test', () => {
             try {
                 await auth.currentUserPoolUser();
             } catch (e) {
-                expect(e).toBe('No current user in userPool');
+                expect(e).toEqual(AuthError.createError("noCurrentUser"));
             }
 
             spyon.mockClear();
@@ -1942,7 +1950,7 @@ describe('auth unit test', () => {
             try {
                 await auth.currentUserPoolUser();
             } catch (e) {
-                expect(e).toBe('No userPool');
+                expect(e).toEqual(AuthError.createError("noUserPool",new Error("This is an error")));
             }
         });
 
@@ -2073,7 +2081,7 @@ describe('auth unit test', () => {
             try {
                 await auth.sendCustomChallengeAnswer(userAfterCustomChallengeAnswer, 'challengeResponse');
             } catch (e) {
-                expect(e).toBe('No userPool');
+                expect(e).toEqual(AuthError.createError("noUserPool",new Error("This is an error")));
             }
 
             spyon.mockClear();

@@ -35,6 +35,8 @@ import {
     ICognitoUserData
 } from 'amazon-cognito-identity-js';
 import { CognitoAuth } from 'amazon-cognito-auth-js';
+import AuthError from './errors';
+import Auth from '../../../node_modules/@aws-amplify/auth/src';
 
 const logger = new Logger('AuthClass');
 const dispatchAuthEvent = (event, data) => {
@@ -178,12 +180,14 @@ export default class AuthClass {
 
     /**
      * Sign up with username, password and other attrbutes like phone, email
-     * @param {String | object} params - The user attirbutes used for signin
+     * @param {String | object} params - The user attributes used for signin
      * @param {String[]} restOfAttrs - for the backward compatability
      * @return - A promise resolves callback data if success
      */
     public signUp(params: string | object, ...restOfAttrs: string[]): Promise<any> {
-        if (!this.userPool) { return Promise.reject('No userPool'); }
+        // if (!this.userPool) { return Promise.reject('No userPool'); }
+        if (!this.userPool) { return Promise.reject(AuthError.createError("noUserPool")); 
+        }
 
         let username : string = null;
         let password : string = null;
@@ -208,11 +212,11 @@ export default class AuthClass {
             }
             validationData = params['validationData'] || null;
         } else {
-            return Promise.reject('The first parameter should either be non-null string or object');
+            return Promise.reject(AuthError.createError("nullParams",new Error("This is an error")));
         }
 
-        if (!username) { return Promise.reject('Username cannot be empty'); }
-        if (!password) { return Promise.reject('Password cannot be empty'); }
+        if (!username) { return Promise.reject(AuthError.createError("noUsername",new Error("This is an error"))); }
+        if (!password) { return Promise.reject(AuthError.createError("noPassword",new Error("This is an error"))); }
 
         logger.debug('signUp attrs:', attributes);
         logger.debug('signUp validation data:', validationData);
@@ -239,9 +243,10 @@ export default class AuthClass {
      * @return - A promise resolves callback data if success
      */
     public confirmSignUp(username: string, code: string, options?: ConfirmSignUpOptions): Promise<any> {
-        if (!this.userPool) { return Promise.reject('No userPool'); }
-        if (!username) { return Promise.reject('Username cannot be empty'); }
-        if (!code) { return Promise.reject('Code cannot be empty'); }
+        if (!this.userPool) { return Promise.reject(AuthError.createError("noUserPool",new Error("This is an error")));
+        }
+        if (!username) { return Promise.reject(AuthError.createError("noUsername",new Error("This is an error"))); }
+        if (!code) { return Promise.reject(AuthError.createError("noCode",new Error("This is an error"))); }
 
         const user = this.createCognitoUser(username);
         const forceAliasCreation = options && typeof options.forceAliasCreation === 'boolean'
@@ -260,8 +265,9 @@ export default class AuthClass {
      * @return - A promise resolves data if success
      */
     public resendSignUp(username: string): Promise<any> {
-        if (!this.userPool) { return Promise.reject('No userPool'); }
-        if (!username) { return Promise.reject('Username cannot be empty'); }
+        if (!this.userPool) { return Promise.reject(AuthError.createError("noUserPool",new Error("This is an error"))); 
+        }
+        if (!username) { return Promise.reject(AuthError.createError("noUsername",new Error("This is an error"))); }
 
         const user = this.createCognitoUser(username);
         return new Promise((resolve, reject) => {
@@ -278,8 +284,9 @@ export default class AuthClass {
      * @return - A promise resolves the CognitoUser
      */
     public signIn(username: string, password?: string): Promise<any> {
-        if (!this.userPool) { return Promise.reject('No userPool'); }
-        if (!username) { return Promise.reject('Username cannot be empty'); }
+        if (!this.userPool) { return Promise.reject(AuthError.createError("noUserPool",new Error("This is an error"))); 
+        }
+        if (!username) { return Promise.reject(AuthError.createError("noUsername",new Error("This is an error"))); }
 
         if (password) {
             return this.signInWithPassword(username, password);
@@ -444,7 +451,7 @@ export default class AuthClass {
                 break;
             default:
                 logger.debug('no validmfa method provided');
-                return Promise.reject('no validmfa method provided');
+                return Promise.reject(AuthError.createError("noValidMfa",new Error("This is an error")));
         }
 
         const that = this;
@@ -572,7 +579,7 @@ export default class AuthClass {
      * @param {String} code - The confirmation code
      */
     public confirmSignIn(user: any, code: string, mfaType: string | null): Promise<any> {
-        if (!code) { return Promise.reject('Code cannot be empty'); }
+        if (!code) { return Promise.reject(AuthError.createError("noCode")); }
 
         const that = this;
         return new Promise((resolve, reject) => {
@@ -606,7 +613,7 @@ export default class AuthClass {
         password: string,
         requiredAttributes: any
     ): Promise<any> {
-        if (!password) { return Promise.reject('Password cannot be empty'); }
+        if (!password) { return Promise.reject(AuthError.createError("noPassword")); }
 
         const that = this;
         return new Promise((resolve, reject) => {
@@ -652,8 +659,9 @@ export default class AuthClass {
      * @param {String} challengeResponses - The confirmation code
      */
     public sendCustomChallengeAnswer(user, challengeResponses: string): Promise<any> {
-        if (!this.userPool) { return Promise.reject('No userPool'); }
-        if (!challengeResponses) { return Promise.reject('Challenge response cannot be empty'); }
+        if (!this.userPool) { return Promise.reject(AuthError.createError("noUserPool",new Error("This is an error"))); 
+        }
+        if (!challengeResponses) { return Promise.reject(AuthError.createError("noChallengeResponse")); }
 
         const that = this;
         return new Promise((resolve, reject) => {
@@ -737,12 +745,13 @@ export default class AuthClass {
      * @return - A promise resolves to curret authenticated CognitoUser if success
      */
     public currentUserPoolUser(): Promise<any> {
-        if (!this.userPool) { return Promise.reject('No userPool'); }
+        if (!this.userPool) { return Promise.reject(AuthError.createError("noUserPool",new Error("This is an error"))); 
+        }
         let user = null;
         if (Platform.isReactNative) {
             const that = this;
             return this.getSyncedUser().then(user => {
-                if (!user) { return Promise.reject('No current user in userPool'); }
+                if (!user) { return Promise.reject(AuthError.createError("noCurrentUser")); }
                 return new Promise((resolve, reject) => {
                     user.getSession(function(err, session) {
                         if (err) { reject(err); } else { resolve(user); }
@@ -751,7 +760,7 @@ export default class AuthClass {
             });
         } else {
             user = this.userPool.getCurrentUser();
-            if (!user) { return Promise.reject('No current user in userPool'); }
+            if (!user) { return Promise.reject(AuthError.createError("noCurrentUser")); }
             return new Promise((resolve, reject) => {
                 user.getSession(function(err, session) {
                     if (err) { reject(err); } else { resolve(user); }
@@ -768,7 +777,7 @@ export default class AuthClass {
         const that = this;
         return (this._userPoolStorageSync || Promise.resolve()).then(result => {
             if (!that.userPool) {
-                return Promise.reject('No userPool');
+                return Promise.reject(AuthError.createError("noUserPool",new Error("This is an error")));
             }
             return that.userPool.getCurrentUser();
         });
@@ -819,12 +828,13 @@ export default class AuthClass {
         let user:any;
         const that = this;
         logger.debug('Getting current session');
-        if (!this.userPool) { return Promise.reject('No userPool'); }
+        if (!this.userPool) { return Promise.reject(AuthError.createError("noUserPool",new Error("This is an error"))); 
+        }
         if (Platform.isReactNative) {
             return this.getSyncedUser().then(user => {
                 if (!user) { 
                     logger.debug('Failed to get user from user pool');
-                    return Promise.reject('No current user'); 
+                    return Promise.reject(AuthError.createError("noCurrentUser")); 
                 }
                 return that.userSession(user);
             });
@@ -832,7 +842,7 @@ export default class AuthClass {
             user = this.userPool.getCurrentUser();
             if (!user) {
                 logger.debug('Failed to get user from user pool');
-                return Promise.reject('No current user'); 
+                return Promise.reject(AuthError.createError("noCurrentUser")); 
             }
             return this.userSession(user);
         }
@@ -946,7 +956,7 @@ export default class AuthClass {
      * @return - A promise resolves to callback data if success
      */
     public verifyUserAttributeSubmit(user, attr, code): Promise<any> {
-        if (!code) { return Promise.reject('Code cannot be empty'); }
+        if (!code) { return Promise.reject(AuthError.createError("noCode")); }
 
         return new Promise((resolve, reject) => {
             user.verifyAttribute(attr, code, {
@@ -1045,8 +1055,9 @@ export default class AuthClass {
      * @return - A promise resolves if success
      */
     public forgotPassword(username: string): Promise<any> {
-        if (!this.userPool) { return Promise.reject('No userPool'); }
-        if (!username) { return Promise.reject('Username cannot be empty'); }
+        if (!this.userPool) { return Promise.reject(AuthError.createError("noUserPool",new Error("This is an error"))); 
+        }
+        if (!username) { return Promise.reject(AuthError.createError("noUsername")); }
 
         const user = this.createCognitoUser(username);
         return new Promise((resolve, reject) => {
@@ -1075,10 +1086,11 @@ export default class AuthClass {
         code: string,
         password: string
     ): Promise<any> {
-        if (!this.userPool) { return Promise.reject('No userPool'); }
-        if (!username) { return Promise.reject('Username cannot be empty'); }
-        if (!code) { return Promise.reject('Code cannot be empty'); }
-        if (!password) { return Promise.reject('Password cannot be empty'); }
+        if (!this.userPool) { return Promise.reject(AuthError.createError("noUserPool",new Error("This is an error"))); 
+        }
+        if (!username) { return Promise.reject(AuthError.createError("noUsername")); }
+        if (!code) { return Promise.reject(AuthError.createError("noCode")); }
+        if (!password) { return Promise.reject(AuthError.createError("noPassword")); }
 
         const user = this.createCognitoUser(username);
         return new Promise((resolve, reject) => {
