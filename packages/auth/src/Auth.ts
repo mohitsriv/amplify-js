@@ -36,7 +36,6 @@ import {
 } from 'amazon-cognito-identity-js';
 import { CognitoAuth } from 'amazon-cognito-auth-js';
 import AuthError from './errors';
-import Auth from '../../../node_modules/@aws-amplify/auth/src';
 
 const logger = new Logger('AuthClass');
 const dispatchAuthEvent = (event, data) => {

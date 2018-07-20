@@ -1,3 +1,5 @@
+import { I18n } from "@aws-amplify/core";
+
 export default class AuthError extends Error {
     message: string;
     suggestion: string;
@@ -9,13 +11,22 @@ export default class AuthError extends Error {
     }
 
     /**
+     * Get Language
+     * @return {String} The language set by the user
+    */
+    static getLanguage() {
+        I18n.createInstance();
+        return (I18n as any).getLanguage();
+    }
+
+    /**
      * Create Error
      * @param {String} key - The key for the message and suggestion
      * @param {Error} cause - Root cause of the error (if applicable)
      * @return {AuthError} A new AuthError object with the member variables defined
     */
     static createError(key: string, cause: Error = null) {
-        const err = new AuthError(this.getMessage(key),this.getSuggestion(key));
+        const err = new AuthError(this.getMessage(key), this.getSuggestion(key));
         err.cause = cause;
         return err;
     }
@@ -46,7 +57,9 @@ export default class AuthError extends Error {
     */
     static getSuggestion(suggestionKey: string) {
         const suggestions = {
-            noUserPool: "Please make sure you see the line \"'aws_user_pools': 'enable'\" in your aws-exports file",
+            noUserPool: "Make sure you've properly congifured Auth. Also, make sure your aws-amplify \
+and aws-amplify-react versions are in sync in your package.json file. See \
+https://github.com/aws-amplify/amplify-js/issues/854 for more information.",
             nullParams: "The first parameter should either be non-null string or object",
             noUsername: "Enter a username",
             noPassword: "Enter a password",
@@ -81,7 +94,7 @@ const errors = {
     currentUserPoolUser745: "No current user in userPool",
     currentUserPoolUser754: "No current user in userPool",
     getSyncedUser771: "No userPool",
-    currentAuthenticatedUser800: "not authenticated",
+    currentAuthenticatedUser800: "not authenticated",                        not handled currently
     currentSession822: "No userPool",
     currentSession827: "No current user",
     currentSession835: "No current user",

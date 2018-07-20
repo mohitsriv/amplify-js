@@ -70,6 +70,14 @@ class I18n {
 
     /**
      * @static @method
+     * Get language
+     */
+    static getLanguage() {
+        return _i18n.getLanguage();
+    }
+
+    /**
+     * @static @method
      * Get value
      * @param {String} key 
      * @param {String} defVal - Default value

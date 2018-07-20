@@ -280,6 +280,7 @@ describe('auth unit test', () => {
                 // console.log("suggestion: ", err.suggestion);
                 // console.log("cause: ", err.cause);
                 // console.log(e);
+                // console.log(AuthError.getLanguage());
                 expect(e).toEqual(err);
             }
         });
