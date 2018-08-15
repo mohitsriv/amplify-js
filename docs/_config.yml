@@ -66,10 +66,12 @@ amplify:
             image: true
             platform: for JavaScript
         nav:
-            - item_name: Quickstart
-              item_url: '/media/quick_start_home'
-            - item_name: Developer Guides
+            - item_name: Get Started
+              item_url: '/media/get_started'
+            - item_name: Guides
               item_url: '/media/developer_guide'
+            - item_name: Toolchain
+              item_url: '/media/cli_home'
             - item_name: User Interface
               item_url: '/media/ui_library'
             - item_name: API
@@ -306,9 +308,9 @@ styleguide:
   - title: 'Typography'
     url: '#typography'
   - title: 'Controls'
-    url: '#controls'
+    url: '#controls--inputs'
   - title: 'Widgets'
     url: '#widgets'
   - title: Components
-    url: '#components'
+    url: '#aws-components'
 

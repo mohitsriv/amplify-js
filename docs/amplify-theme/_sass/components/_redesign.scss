@@ -112,7 +112,7 @@
     margin-top: 8px;
     background: transparent !important;
 
-    @media (max-width: 992px){
+    @media (max-width: 882px){
         margin-top: 20px !important;
     }
 
@@ -182,7 +182,7 @@
     }
 }
 
-@media (max-width: $screen-md-min) {
+@media (max-width: 882px) {
 	.site-header__nav {
 		width: 100%;
 		background: white;
@@ -386,7 +386,7 @@ a {
 
     @media (max-width: 767px) {
         height: auto !important;
-        background: linear-gradient(30deg, #f90 55%, #fccf30) !important;
+        background: linear-gradient(30deg, #FF9900 55%, #FFC300) !important;
         padding-bottom: 8px !important;
 
         #half-phone {
@@ -786,6 +786,7 @@ a {
 
     .image-container {
         #library-auth {
+            margin-top: 43px;
             @media (max-width: 767px) {
                 margin-top: 40px;
             }
@@ -798,7 +799,7 @@ a {
 
             float: right;
             //margin-right: 100px;
-            margin-top: -127px;
+            margin-top: -90px;
 
             @media (max-width: 1102px) {
                 margin-top: 20px;
@@ -973,7 +974,7 @@ body {
 /* ----- Title ----- */
 .hero-subheader__title {
     height: 168px;
-    width: 740px;
+    width: 660px;
     color: #FFFFFF;
     font-family: "Amazon Ember", "Helvetica", sans-serif;
     font-size: 50px;
@@ -1402,35 +1403,44 @@ li {
 
 #learn-more-about-cli-box {
     display: inline-block;
+    margin-left: 80px;
 
     @media (max-width: 767px) {
         display: block;
         width: 226px;
         margin: auto;
         margin-top: 10px;
-    }
-
-    #learn-more-about-cli {
-        color: #FF9900;
-        font-family: "Amazon Ember", "Helvetica", sans-serif;
-        font-size: 16px;
-        line-height: 24px;
-        display: inline-block;
-        margin-left: 80px;
-
-        @media (max-width: 767px) {
-            margin-left: 0;
-        }
+        margin-left: 0;
     }
 }
 
+.learn-more-link-box {
+    margin-bottom: 20px;
+}
 
-#down-arrow {
+.learn-more-link {
+    color: #FF9900;
+    font-family: "Amazon Ember", "Helvetica", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    display: inline-block;
+}
+
+.down-arrow {
     display: inline-block;
     vertical-align: middle;
     margin-left: 13px;
     box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
     border-radius: 100%;
+}
+
+.side-arrow {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 13px;
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+    border-radius: 100%;
+    transform: rotate(-90deg);
 }
 
 .section-top-quickstart {
@@ -1590,7 +1600,7 @@ li {
     .site-header__nav {
         width: auto;
 
-        @media (max-width: 992px) {
+        @media (max-width: 882px) {
             margin-top: 8px !important;
         }
     }
@@ -2123,7 +2133,7 @@ li {
 
             .logo-title {
                 color: #232F3E;
-                font-family: "Amazon Ember";
+                font-family: "Amazon Ember", "Helvetica", sans-serif;
                 font-size: 16px;
                 letter-spacing: 1.06px;
                 line-height: 20px;
@@ -2167,6 +2177,10 @@ li {
 /***                        new stuff for style guide                      ***/
 //=============================================================================
 
+#styleguide-section {
+    background-color: #F6F6F5
+}
+
 .styleguide-container {
     background: none;
     box-shadow: none;
@@ -2185,6 +2199,9 @@ li {
         font-size: 40px !important;
         font-weight: bold !important;
         line-height: 60px !important;
+        border-top: 1px solid #232F3E !important;
+        border-bottom: 1px solid #E1E4EA !important;
+        padding: 20px 0 20px 0 !important;
     }
 
     h3 {
@@ -2193,15 +2210,52 @@ li {
         font-size: 21px !important;
         font-weight: bold !important;
         line-height: 26px !important;
+        margin-top: 50px;
+    }
+
+    p {
+        margin-bottom: 20px;
+        color: #232F3E !important;
+        display: inline-block;
+    }
+
+    img {
+        max-width: none;;
     }
 
     .title {
         color: #828282;	
-        font-family: "Amazon Ember";	
+        font-family: "Amazon Ember", "Helvetica", sans-serif;	
         font-size: 12px;	
         font-weight: bold;	
         line-height: 15px;
         display: block;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+
+    .excerpt {
+        margin-bottom: 16px;
+    }
+
+    .inline-img {
+        display: inline-block;
+        margin-right: 62px;
+        margin-bottom: 40px;
+    }
+
+    .btn-img {
+        margin-right: 50px;
+
+        .btn-colors {
+            @media (min-width: 1306px) {
+                margin-top: 45px;   
+            }
+        }
+
+        #critical-action-btn-colors {
+            width: 163px;
+        }
     }
 
     .font-link {
@@ -2216,11 +2270,130 @@ li {
 
     .font-specific {
         color: #232F3E;
-        font-family: "Amazon Ember";
+        font-family: "Amazon Ember", "Helvetica", sans-serif;
         font-size: 16px;
         line-height: 24px;
         font-weight: bold;
         display: block;
+    }
+
+    .font-example {
+        float: right;
+        width: 66%;
+    }
+
+    .font-example-div {
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    #h1 {
+        font-size: 50px;	
+        font-weight: bold;	
+        line-height: 60px;
+        margin-top: -12px;
+    }
+
+    #h2 {
+        font-size: 42px;	
+        font-weight: 300;	
+        line-height: 53px;
+        margin-top: -10px;
+    }
+
+    #h4 {
+        font-size: 28px;	
+        font-weight: 300;	
+        line-height: 35px;
+        margin-top: -8px;
+    }
+
+    #h5 {
+        font-size: 20px;	
+        font-weight: bold;	
+        line-height: 25px;
+        margin-top: -4px;
+    }
+
+    #p {
+        font-size: 16px;	
+        line-height: 24px;
+    }
+
+    .inline-div {
+        display: inline-block;
+    }
+
+    #dropdowns {
+        @media (min-width: 1246px) {
+            float: right;
+        }
+    }
+
+    #tooltips {
+        @media (min-width: 1248px) {
+            margin-left: 63px;
+        }
+    }
+
+    #recover-user {
+        width: 483px;
+        @media (min-width: 1312px) {
+            float: right;
+
+            .inline-img {
+                float: right;
+            }
+
+            #recover-user-title {
+                margin-left: 18px;
+            }
+        }
+    }
+
+    #message-chat {
+        @media (min-width: 1178px) {
+            float: right;
+            margin-right: 50px;
+        }
+    }
+
+    #new-user-mobile-keyboard {
+        @media (min-width: 1184px) {
+            position: relative;
+            bottom: 490px;
+            margin-bottom: -490px;
+        }
+    }
+
+    .statusbar-img {
+        margin-bottom: 10px;
+    }
+
+    .small-right-margin {
+        margin-right: 11px;
+    }
+
+    .no-right-margin {
+        margin-right: 0px;
+    }
+
+    .statusbar-text {
+        display: block;
+        color: #4A4A4A; 
+        font-size: 13px;	
+        line-height: 18px;
+        width: 373px;
+        margin-bottom: 40px;
+    }
+
+    .mobile-right-margin {
+        margin-right: 72px;
+    }
+
+    .separator {
+        border-bottom: 1px solid #E1E4EA;
+        width: 100%;
     }
 }
 
@@ -2230,13 +2403,22 @@ li {
     .sections-list {
         margin-top: 100px;
     }
-    .style-category {
-        color: #232F3E;
-        font-family: "Amazon Ember";
-        font-size: 28px;
-        font-weight: 300;
-        line-height: 35px;
-        display: block;
-        margin-bottom: 20px;
+
+    li {
+        .style-category {
+            color: #828282 !important;
+            font-family: "Amazon Ember" !important;
+            font-size: 28px !important;
+            font-weight: 300 !important;
+            line-height: 35px !important;
+            display: block !important;
+            margin-bottom: 20px !important;
+            text-decoration: none !important;
+        }
+        &.active {
+            .style-category {
+                color: #232F3E !important;
+            }     
+        }
     }
 }
