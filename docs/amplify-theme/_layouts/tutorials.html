@@ -19,7 +19,7 @@
 										<span>
 											<div class="dev-guide-content" data-mh>
 												<p class="dev-guide__title">{{ item.title }}</p>
-												<p class="dev-guide__excerpt">{{ item.excerpt }}</p>
+												<!-- <p class="dev-guide__excerpt">{{ item.excerpt }}</p> -->
 											</div><!-- /.nav-grid__content -->
 										</span><!-- /.nav-grid__item -->
 									</div><!-- /.col -->
@@ -49,15 +49,12 @@
 													<div class="row">
 														{% for item in category.subs %}
 															<div class="col-xs-12 col-sm-6 col-lg-4">
-																<a href="{% if item.url_external  %}
+																<a target="_blank" href="{% if item.url_external  %}
 																			{{ item.url_external }} 
 																		{% endif %}
 																		{% if item.url %}
 																			{% if jekyll.environment == 'production' %}{{ site.amplify.baseurl }}{% endif %}{{ item.url }} 
 																		{% endif %}" 
-																		{% if item.url_external  %}
-																			onclick="trackOutboundLink('{{ item.url_external }}'); return false;"; 
-																		{% endif %}
 																	class="dev-guide-item">					
 																	<div class="dev-guide-content tutorials-content" data-mh>
 																		<div class="dev-guide-title" >
