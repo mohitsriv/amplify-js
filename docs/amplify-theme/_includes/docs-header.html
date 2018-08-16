@@ -1,17 +1,3 @@
-{% if site.amplify.header.logo.text or site.amplify.header.logo.image or site.amplify.header.nav %}
-<div class="notification-bar row" id="notification-bar">
-	<div class="notification-content">
-		<div class="col-xs-5">
-			<img class="notification-image" src="{% if jekyll.environment == 'production' %}{{ site.amplify.baseurl }}{% endif %}/images/icons/Medium/Volume.svg">
-		</div>
-		<p class="notification-text col-xs-7">News: The New VR Component is live and ready to deploy!</p>
-	</div>
-	<div class="close-button">
-		<a href=''><i class="icon icon--x"></i></a>
-	</div>
-</div>
-{% endif %}
-
 
 {% if site.amplify.header.nav %}
 	<div class="offcanvas visible-xs">
@@ -53,9 +39,24 @@
                                 <option value="javascript">JavaScript</option>
                                 <option value="cli">Amplify CLI</option>
                             </select>
-                        </div>
+						</div>
 					{% if site.amplify.header.nav %}
 						<ul class="site-header__nav hidden-xs">
+						{% for item in site.amplify.header.nav %}
+							<li class="docs-nav">
+								{% if item.item_external_url %}
+									<a class="white-text" href="{{ item.item_external_url }}">
+										{% if item.item_icon %}<i class="icon icon--{{ item.item_icon  }}"></i>{% endif %}
+										{{ item.item_name }}
+									</a>
+								{% else %}
+									<a class="white-text" href="{% if jekyll.environment == 'production' %}{{ site.amplify.baseurl }}{% endif %}{{ item.item_url }}">
+										{% if item.item_icon %}<i class="icon icon--{{ item.item_icon  }}"></i>{% endif %}
+										{{ item.item_name }}
+									</a>
+								{% endif %}
+							</li>
+						{% endfor %}
 							<li class="site-search">
 								<input placeholder="   Search Docs" type="text" id="search-input"><img class="search-image" id="search-image" src="{% if jekyll.environment == 'production' %}{{ site.amplify.baseurl }}{% endif %}/images/layout/Search.svg"></input>
 							</li>
@@ -70,6 +71,7 @@
 					{% endif %}
 				</div><!-- /.col -->
 			</div><!-- /.row -->
+			<a id="github-logo-docs" href="https://github.com/aws-amplify/amplify-js"><img src="{% if jekyll.environment == 'production' %}{{ site.amplify.baseurl }}{% endif %}/images/Logos/GitHub-Mark-32px.png" /></a>
 		</div><!-- /.container -->
 	</header><!-- /.site-header -->
 {% endif %}

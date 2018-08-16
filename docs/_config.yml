@@ -62,7 +62,7 @@ amplify:
     color_theme:  # Available themes: blue (default), green, purple, red and yellow
     header:
         logo:
-            text: Amplify
+            text: AWS Amplify
             image: true
             platform: for JavaScript
         nav:
@@ -70,9 +70,11 @@ amplify:
               item_url: '/media/get_started'
             - item_name: Guides
               item_url: '/media/developer_guide'
+            - item_name: Tutorials
+              item_url: '/media/tutorials'
             - item_name: Toolchain
               item_url: '/media/cli_home'
-            - item_name: User Interface
+            - item_name: UI Components
               item_url: '/media/ui_library'
             - item_name: API
               item_url: '/api/'
@@ -114,27 +116,27 @@ permalink: /:title
 category_list:
     - category: SetupAndInstallation
       title: Setup & Installation
-      excerpt: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+      excerpt: 
       base_url: 'quick_start'
       subs:
         - title: Quick Start
           excerpt: quick start excerpt
-          url: 'quick_start'
+          url: '/media/quick_start'
           icon: '/images/icons/Misc/Present.svg'
         - title: Amplify CLI
           excerpt: CLI excerpt
-          url: 'cli_guide'
+          url: '/media/cli_guide'
           icon: '/images/icons/Misc/Present.svg'
     - category: CloudFeatures
       title: Cloud Features
-      excerpt: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-      base_url: 'analytics_guide'
+      excerpt: Add cloud features to your app quickly using our toolchain and declarative APIs.
+      base_url: '/media/analytics_guide'
       subs:
         - title: Analytics 
           excerpt: Drop-in analytics to track user sessions, custom user attributes, and in-app metrics.
           cta: Read more
           class: aws-icon-ps-60-pie-bar-charts 
-          url: 'analytics_guide'
+          url: '/media/analytics_guide'
           icon: '/images/icons/Misc/Present.svg'
           services:
             - title: Amazon Pinpoint,
@@ -147,7 +149,7 @@ category_list:
           excerpt: A simple and secure solution for making HTTP requests using REST and GraphQL, with support for real-time data.
           cta: Read more
           class: aws-icon-ps-60-database-server
-          url: 'api_guide' 
+          url: '/media/api_guide' 
           icon: '/images/icons/Misc/Present.svg'   
           services: 
             - title: Amazon API Gateway,
@@ -158,7 +160,7 @@ category_list:
           excerpt:  Authentication APIs with pre-built UI components for your app.  
           cta: Read more
           class: aws-icon-ps-60-shield-circle
-          url: 'authentication_guide'
+          url: '/media/authentication_guide'
           icon: '/images/icons/Misc/Present.svg'
           services:
             - title: Amazon Cognito,
@@ -167,20 +169,11 @@ category_list:
               url: https://aws.amazon.com/cognito/
             - title: Custom Plugin
               url:  
-        - title: Hosting 
-          excerpt: Deploy your Web app or static website for global CDN distribution with media streaming support.
-          cta: Read more
-          class: aws-icon-ps-60-network-nodes
-          url: 'hosting_guide'   
-          icon: '/images/icons/Misc/Present.svg'
-          services:
-              - title: Amazon CloudFront
-                url: https://aws.amazon.com/cloudfront/
         - title: Interactions 
           excerpt: Create conversational bots powered by deep learning technologies.
           cta: Read more
           class: aws-icon-ps-60-bubble-gear
-          url: 'interactions_guide'   
+          url: '/media/interactions_guide'   
           icon: '/images/icons/Misc/Present.svg'
           services:
               - title: Amazon Lex
@@ -189,7 +182,7 @@ category_list:
           excerpt: Connect your app to message-oriented middleware on the cloud.
           cta: Read more
           class: aws-icon-ps-60-circular-circuit
-          url: 'pub_sub_guide'   
+          url: '/media/pub_sub_guide'   
           icon: '/images/icons/Misc/Present.svg'
           services:
               - title: AWS IoT,
@@ -202,7 +195,7 @@ category_list:
           excerpt: Push notifications with campaign analytics and targeting.
           cta: Read more
           class: aws-icon-ps-60-device-message
-          url: 'push_notifications_setup'   
+          url: '/media/push_notifications_setup'   
           icon: '/images/icons/Misc/Present.svg'
           services:
               - title: Amazon Pinpoint
@@ -211,74 +204,95 @@ category_list:
           excerpt: A simple mechanism for managing user content in public, protected or private storage.
           cta: Read more
           class: aws-icon-ps-60-file-box
-          url: 'storage_guide'   
+          url: '/media/storage_guide'   
           icon: '/images/icons/Misc/Present.svg'
           services:
               - title: Amazon S3
                 url: https://aws.amazon.com/s3/
     - category: UtilityModules
       title: Utility Modules
-      excerpt: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-      base_url: 'cache_guide'
+      excerpt: Common programming utilities that you can use with your app.
+      base_url: '/media/cache_guide'
       subs:
         - title: Cache 
           excerpt: A generic LRU cache for storing data with priority and expiration settings. 
           cta: Read more
-          url: 'cache_guide'  
+          url: '/media/cache_guide'  
           icon: '/images/icons/Misc/Present.svg'
         - title: Hub  
           excerpt: A lightweight local event bus for your app.
           cta: Read more
-          url: 'hub_guide' 
+          url: '/media/hub_guide' 
           icon: '/images/icons/Misc/Present.svg'
         - title: I18n  
           excerpt: A lightweight internationalization solution.
           cta: Read more
-          url: 'i18n_guide'  
+          url: '/media/i18n_guide'  
           icon: '/images/icons/Misc/Present.svg'
         - title: Logger  
           excerpt: Console logging utility.
           cta: Read more
-          url: 'logger_guide'  
+          url: '/media/logger_guide'  
           icon: '/images/icons/Misc/Present.svg'
         - title: Service Worker 
           excerpt: A utility class to work with PWA and Service Worker APIs. 
           cta: Read more
-          url: 'service_workers_guide'   
-          icon: '/images/icons/Misc/Present.svg'     
+          url: '/media/service_workers_guide'   
+          icon: '/images/icons/Misc/Present.svg'   
+          
+    - category: Toolchain
+      title: Toolchain
+      excerpt: Better developer experience when building and deploying your apps.
+      base_url: '/media/cache_guide'
+      subs:
+        - title: CLI 
+          excerpt: Manage all of your services in one unified tool with Amplify Command Line Interface
+          cta: Read more
+          url: '/media/cli_guide'  
+          icon: '/images/icons/Misc/Present.svg'
+        - title: Hosting 
+          excerpt: Deploy your Web app or static website for global CDN distribution with media streaming support.
+          cta: Read more
+          class: aws-icon-ps-60-network-nodes
+          url: '/media/hosting_guide'   
+          icon: '/images/icons/Misc/Present.svg'
+          services:
+              - title: Amazon CloudFront
+                url: https://aws.amazon.com/cloudfront/
+          
     - category: FrontEndSupport
       title: Front End Support
-      excerpt: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-      base_url: 'angular_guide'
+      excerpt: Bring your own front-end! We support the most popular front-end frameworks and libraries.
+      base_url: '/media/angular_guide'
       subs:
         - title: Angular 
           excerpt: AWS Amplify provides Angular Components with aws-amplify-angular npm package.
           cta: Read more
-          url: 'angular_guide' 
+          url: '/media/angular_guide' 
           icon: '/images/Logos/Angular-Color@1x.png'
           id: angular
         - title: React 
           excerpt: AWS Amplify provides React Components with aws-amplify-react npm package and a starter App.
           cta: Read more
-          url: 'react_guide' 
+          url: '/media/react_guide' 
           icon: '/images/Logos/React-Color@1x.png'
           id: react
         - title: React Native
           excerpt: AWS Amplify provides React Native Components with aws-amplify-react npm package and a starter App.
           cta: Read more
-          url: 'react_native_guide' 
+          url: '/media/react_native_guide' 
           icon: '/images/Logos/React-Color@1x.png'
           id: react-native
         - title: Vue.js
           excerpt: To help you start working with AWS Amplify, we provide a Starter App.
           cta: Read more
-          url: 'vuejs_guide' 
+          url: '/media/vuejs_guide' 
           icon: '/images/Logos/Vue-Color@1x.png'
           id: vuejs
         - title: Ionic
           excerpt: AWS Amplify provides Angular Components that you can use with Ionic in aws-amplify-angular npm package.
           cta: Read more
-          url: 'ionic_guide' 
+          url: '/media/ionic_guide' 
           icon: '/images/Logos/Ionic-Color@1x.png'
           id: ionic
 
@@ -314,3 +328,12 @@ styleguide:
   - title: Components
     url: '#aws-components'
 
+js_libraries:
+  - title: React
+    url: '?platform=react'
+  - title: React Native
+    url: '?platform=react-native'
+  - title: Angular
+    url: '?platform=angular'
+  - title: JavaScript (no library)
+    url: '?platform=purejs'
