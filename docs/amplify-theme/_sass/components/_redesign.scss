@@ -23,6 +23,22 @@
     display: block !important;
 }
 
+.content-filter {
+    float:none;
+    .filter-item {
+        float:left;
+        margin-right: 10px;
+    }
+    .btn {
+        height: 30px !important;
+        font-weight: normal;
+    }
+    .row {
+        margin-bottom:15px !important;
+        line-height: 38px;
+    }
+}
+
 .site-header {
 	position: fixed;
 	//width: 1442px;
@@ -47,19 +63,16 @@
         width: 1180px;
         max-width: 90%;
 
-        @media (max-width:1080px) {
-            max-width: 100%;
-            margin-left: 5%;
-        }
-
         @media (max-width: 828px) {
             max-width: 95%;
             margin-top: 11px;
+            margin-left: 0;
         }
         
         #github-logo {
             position: absolute;
             display: none;
+            opacity: 0.5;
 
             @media (min-width: 1314px) {
                 right: calc(50vw - 640px);
@@ -207,6 +220,11 @@
     height: 36px;
     width: 180px;
     margin-top: -7px;
+
+    @media (max-width: 936px) {
+        margin-top: 10px !important;
+        float: right !important;
+    }
     
     .search-image {
         margin-left: 12px;
@@ -309,6 +327,12 @@ a {
     position: absolute;
     top: 17px;
     left: 10px;
+
+    .docs-toggle {
+        span {
+            background-color: white !important;
+        }
+    }
 
     .offcanvas-toggle {
         height: auto;
@@ -486,6 +510,11 @@ a {
     .ui-header {
         position: relative;
         top: 75px;
+        
+        @media (max-width: 828px) {
+            top: 0;
+            margin-bottom: 50px;
+        }
     }
 
 	color: $color-dark-blue;
@@ -534,7 +563,15 @@ a {
             width: 230px;
             padding-top: 17px;
         }
-	}
+    }
+    
+    .btn:hover {
+        background-color: #ededed
+    }
+
+    .btn:focus {
+        background-color: #d6d6d6;
+    }
 
 	.btn--github,
 	.btn--w-arrow-down {
@@ -602,6 +639,30 @@ a {
     padding: 0 40px;
     height: 60px;
     text-transform: uppercase;
+}
+
+.btn:hover {
+    background-color: #FFA41D;
+}
+
+.btn:focus {
+    background-color: #E88B01;
+}
+
+.btn--light {
+	color: $color-black;
+	background-color: white;
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $color-white;
+        background-color: orange;
+        border-color: orange;
+    }
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgray;
 }
 
 @media (max-width: 828px) {
@@ -721,6 +782,28 @@ a {
 
     #library-btn {
         margin-bottom: 60px;
+    }
+
+    #cli-code-block {
+        @media (max-width: 1130px) {
+            display: none !important;
+        }
+        width: 500px;
+        position: relative;
+        float: right;
+        bottom: 100px;
+        margin-bottom: -60px;
+
+        pre {
+            //height: 144px;
+            padding: 14px;
+        }
+
+        pre.highlight {
+            font-size: 12px !important;
+            line-height: 16px !important;
+            overflow: hidden;
+        }
     }
 
     #homepage-code-block {
@@ -1079,11 +1162,15 @@ body {
     }
 }
 
-.hero-subheader--before-out {
-	@media (min-width: $screen-sm-min) {
+.hero-subheader {
+	@media (min-width: 828px) {
         //padding: 9.375rem 0 (15.3125rem - 1.25rem) 0;
         padding-top: 130px;
-	}
+    }
+    
+    @media (max-width: 936px) {
+        padding-top: 165px;
+    }
 }
 
 /* ----- Title ----- */
@@ -1253,6 +1340,10 @@ li {
     width: 90%;
     margin: auto;
 
+    @media (max-width: 828px) {
+        width: 100% !important;
+    }
+
     .section-top {
         max-width: 1180px;
         width: 100%;
@@ -1291,6 +1382,10 @@ li {
                     margin-top: 60px;
                     margin-bottom: 60px;
 
+                    @media (max-width: 936px) {
+                        margin-top: 120px;
+                    }
+
                     @media (max-width: 828px) {
                         margin-top: 80px;
                         font-size: 30px;
@@ -1299,6 +1394,7 @@ li {
                         margin-left: auto;
                         margin-right: auto;
                         text-align: center;
+                        margin-bottom: 0;
                     }
                 }
 
@@ -1430,6 +1526,13 @@ li {
                     }
                 }
 
+                .dev-guide-by {
+                    color: gray;
+                    font-size: 13px;
+                    margin-top: -15px;
+                    margin-bottom: 10px;
+                }
+
                 .dev-guide-excerpt {
                     color: #828282;
                     font-family: "Amazon Ember", "Helvetica", sans-serif;
@@ -1544,16 +1647,20 @@ li {
     }
 }
 
-.learn-more-link-box {
+.amplify-link-box {
     margin-bottom: 20px;
 }
 
-.learn-more-link {
+.amplify-link {
     color: #FF9900;
     font-family: "Amazon Ember", "Helvetica", sans-serif;
     font-size: 16px;
     line-height: 24px;
     display: inline-block;
+}
+
+.amplify-link:hover {
+    text-decoration: underline;
 }
 
 .down-arrow {
@@ -1565,6 +1672,8 @@ li {
 }
 
 .side-arrow {
+    position: relative;
+    right: 5px;
     display: inline-block;
     vertical-align: middle;
     //margin-left: 13px;
@@ -1599,7 +1708,7 @@ li {
 
         @media (max-width: 828px) {
             width: 37px;
-            line-height: 37px;
+            line-height: 34px;
             font-size: 22px;
             top: 10px;
             right: 10px;
@@ -1829,6 +1938,10 @@ li {
             font-family: "Amazon Ember", "Helvetica", sans-serif;
             font-size: 16px;
             line-height: 24px;
+        }
+
+        select:focus {
+            outline: none;
         }
     }
 }
@@ -2175,6 +2288,7 @@ li {
         float: right;
         width: calc(100% - 280px);
         padding: 53px 65px;
+        margin-bottom: 20px;
 
         @media (max-width: 828px) {
             float: left;
@@ -2189,16 +2303,22 @@ li {
             position: absolute;
             top: 27px;
             right: 27px;
+
+            @media (max-width: 828px) {
+                position: static;
+                margin-bottom: 20px;
+                width: 200px;
+            }
                 
-                select {
-                    color: white;
-                    font-family: "Amazon Ember", "Helvetica", sans-serif;
-                    font-size: 16px;	
-                    line-height: 24px;
-                    padding: 10px;
-                    border: none;
-                    filter: brightness(0) invert(1);
-                }
+            select {
+                color: white;
+                font-family: "Amazon Ember", "Helvetica", sans-serif;
+                font-size: 16px;	
+                line-height: 24px;
+                margin: 10px;
+                border: none;
+                filter: brightness(0) invert(1);
+            }
         }
 
         .content {
@@ -2309,7 +2429,12 @@ li {
 .section-top.cli {
     .marketing-content {
         width: 40%;
-        margin-top: 40px;
+        margin-bottom: 10px;
+
+        @media (max-width: 1130px) {
+            width: 80%;
+            margin-bottom: 0;
+        }
 
         @media (max-width: 828px) {
             width: 100%;
@@ -2385,6 +2510,10 @@ li {
 
     #orange-logos {
         width: 220px;
+
+        @media (max-width: 1130px) {
+            margin-bottom: 40px;
+        }
     }
 
     #pages {
@@ -2417,6 +2546,14 @@ li {
     display: inline-block;
     width: calc(100% - 230px) !important;
 
+    @media (max-width: 1023px) {
+        overflow: scroll;
+    }
+
+    @media (max-width: 828px) {
+        width: calc(100% - 140px) !important;
+    }
+
     .ui-section {
         border-bottom: 1px solid #232F3E;
     }
@@ -2427,7 +2564,7 @@ li {
 
     h2 {
         color: #232F3E !important;
-        font-family: "Amazon Ember" !important;
+        font-family: "Amazon Ember", "Helvetica", sans-serif !important;
         font-size: 42px !important;	
         font-weight: 300 !important;	
         line-height: 53px !important;
@@ -2439,7 +2576,7 @@ li {
 
     h3 {
         color: #232F3E !important;
-        font-family: "Amazon Ember" !important;
+        font-family: "Amazon Ember", "Helvetica", sans-serif !important;
         font-size: 21px !important;
         font-weight: bold !important;
         line-height: 26px !important;
@@ -2633,6 +2770,10 @@ li {
 .styleguide-nav {
     width: 230px !important;
     top: 80px !important;
+
+    @media (max-width: 828px) {
+        width: 140px !important;
+    }
     
     .sections-list {
         margin-top: 30px;
@@ -2641,13 +2782,18 @@ li {
     li {
         .style-category {
             color: #828282 !important;
-            font-family: "Amazon Ember" !important;
+            font-family: "Amazon Ember", "Helvetica", sans-serif !important;
             font-size: 28px !important;
             font-weight: 300 !important;
             line-height: 35px !important;
             display: block !important;
             margin-bottom: 20px !important;
             text-decoration: none !important;
+
+            @media (max-width: 828px) {
+                font-size: 20px !important;
+                line-height: 24px !important;
+            }
         }
         &.active {
             .style-category {
